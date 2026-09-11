@@ -7,20 +7,10 @@ extern "C" {
     #include <esp_system.h>
 }
 
-/******************************************************************************
- * FunctionName : user_rf_cal_sector_set
- * Description  : SDK just reversed 4 sectors, used for rf init data and paramters.
- *                We add this function to force users to set rf cal sector, since
- *                we don't know which sector is free in user's application.
- *                sector map for last several sectors : ABCCC
- *                A : rf cal
- *                B : rf init data
- *                C : sdk parameters
- * Parameters   : none
- * Returns      : rf cal sector
-*******************************************************************************/
-// ReSharper disable once CppFunctionDoesntReturnValue
-// ReSharper disable once CppUseInternalLinkage
+// SDK just reversed 4 sectors, used for rf init data and paramters.
+// We add this function to force users to set rf cal sector, since
+// we don't know which sector is free in user's application.
+// sector map for last several sectors : ABCCC
 extern "C" uint32_t user_rf_cal_sector_set(void)
 {
     const flash_size_map size_map = system_get_flash_size_map();
@@ -52,13 +42,7 @@ extern "C" uint32_t user_rf_cal_sector_set(void)
     return rf_cal_sec;
 }
 
-/******************************************************************************
- * FunctionName : user_init
- * Description  : entry of user application, init user function here
- * Parameters   : none
- * Returns      : none
-*******************************************************************************/
-// ReSharper disable once CppUseInternalLinkage
+// entry of user application, init user function here
 extern "C" void user_init(void) {
     xTaskCreate(
         &display_task,
