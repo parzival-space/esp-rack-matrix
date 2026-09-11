@@ -44,6 +44,9 @@ extern "C" uint32_t user_rf_cal_sector_set(void)
 
 // entry of user application, init user function here
 extern "C" void user_init(void) {
+    // diable wifi soft-ap
+    wifi_set_opmode(NULL_MODE);
+
     xTaskCreate(
         &display_task,
         reinterpret_cast<const signed char *>("startup"), // my life would probably be better if I wouldn't use a esp8266, old FreeRTOS header issue apparently
