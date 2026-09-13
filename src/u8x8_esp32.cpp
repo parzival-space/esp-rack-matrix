@@ -1,4 +1,4 @@
-#include <u8x8_esp8266.h>
+#include <u8x8_esp32.h>
 
 #include <U8x8lib.h>
 
@@ -9,17 +9,16 @@ extern "C" {
     #include <rom/ets_sys.h>
 }
 
-
-uint8_t u8x8_esp8266_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
-    auto *pins = static_cast<uint8_t *>(u8x8_GetUserPtr(u8x8));
+uint8_t u8x8_esp32_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
+    const auto *pins = static_cast<uint8_t *>(u8x8_GetUserPtr(u8x8));
 
     // the implementation below is based on the arduino implementation in U8x8lib.cpp
     switch (msg) {
         case U8X8_MSG_GPIO_AND_DELAY_INIT:
-            for (uint8_t i = 0; i < U8X8_ESP8266_PIN_CNT; i++) {
+            for (uint8_t i = 0; i < U8X8_ESP32_PIN_CNT; i++) {
                 if (const uint8_t pin = pins[i]; pin < GPIO_NUM_MAX) {
                     // skip if pin is not configured
-                    if (pin == U8X8_ESP8266_PIN_NONE) continue;
+                    if (pin == U8X8_ESP32_PIN_NONE) continue;
 
                     if (i < U8X8_PIN_OUTPUT_CNT) {
                         printf("Setup %d as output\n", pin);
@@ -74,7 +73,7 @@ uint8_t u8x8_esp8266_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_in
         default:
             if (msg >= U8X8_MSG_GPIO(0)) {
                 uint8_t pin_index = (msg)&0x3f; // logic extracted from u8x8.h u8x8_GetPinValue(u8x8, msg)
-                if (const uint8_t pin = pins[pin_index]; pin < GPIO_NUM_MAX && pin != U8X8_ESP8266_PIN_NONE) {
+                if (const uint8_t pin = pins[pin_index]; pin < GPIO_NUM_MAX && pin != U8X8_ESP32_PIN_NONE) {
                     if (pin_index < U8X8_PIN_OUTPUT_CNT) {
                         gpio_set_level(static_cast<gpio_num_t>(pin), arg_int);
                     } else {
