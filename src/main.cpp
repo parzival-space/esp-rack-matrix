@@ -7,8 +7,5 @@ extern "C" {
 
 // entry of user application, init user function here
 extern "C" void app_main(void) {
-    xTaskCreate(
-        &display_task,
-        "startup",
-        2048, NULL, 1, NULL);
+    xTaskCreate(&display_task,"startup",2048, nullptr, 1, nullptr);
 }
