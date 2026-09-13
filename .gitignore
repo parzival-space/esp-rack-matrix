@@ -1,1 +1,4 @@
 .pio
+
+# auto generated sdkconfig
+sdkconfig.*
