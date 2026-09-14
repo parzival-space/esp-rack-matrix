@@ -7,9 +7,7 @@
 void display_task(void *arguments) {
     // init display
     U8X8_ESP32_MAX7219_8X8_4W_SW_SPI u8x8(
-        3,
-        2,
-        1,
+        3,2,1,
         U8X8_ESP32_PIN_NONE
     );
     u8x8.begin();

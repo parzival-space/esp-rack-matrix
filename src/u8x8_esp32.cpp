@@ -7,6 +7,7 @@ extern "C" {
     #include <freertos/task.h>
     #include <driver/gpio.h>
     #include <rom/ets_sys.h>
+    #include <esp_log.h>
 }
 
 uint8_t u8x8_esp32_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) {
@@ -21,7 +22,7 @@ uint8_t u8x8_esp32_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int,
                     if (pin == U8X8_ESP32_PIN_NONE) continue;
 
                     if (i < U8X8_PIN_OUTPUT_CNT) {
-                        printf("Setup %d as output\n", pin);
+                        ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, "u8x8_esp32", "Setup %d as output", pin);
                         gpio_config_t output{};
                         output.mode = GPIO_MODE_OUTPUT;
                         output.intr_type = GPIO_INTR_DISABLE;
@@ -30,7 +31,7 @@ uint8_t u8x8_esp32_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int,
                         output.pull_up_en = GPIO_PULLUP_DISABLE;
                         gpio_config(&output);
                     } else {
-                        printf("Setup %d as input\n", pin);
+                        ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, "u8x8_esp32", "Setup %d as input", pin);
                         gpio_config_t input{};
                         input.mode = GPIO_MODE_INPUT;
                         input.intr_type = GPIO_INTR_DISABLE;
