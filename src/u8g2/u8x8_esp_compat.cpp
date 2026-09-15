@@ -2,6 +2,8 @@
 
 #include <U8x8lib.h>
 
+static const char* TAG = "u8x8_esp";
+
 extern "C" {
     #include <freertos/FreeRTOS.h>
     #include <freertos/task.h>
@@ -22,7 +24,7 @@ uint8_t u8x8_esp_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, v
                     if (pin == U8X8_ESP_PIN_NONE) continue;
 
                     if (i < U8X8_PIN_OUTPUT_CNT) {
-                        ESP_LOGD("u8x8_esp32", "Configure GPIO %d as output", pin);
+                        ESP_LOGD(TAG, "Configure GPIO %d as output", pin);
                         gpio_config_t output{};
                         output.mode = GPIO_MODE_OUTPUT;
                         output.intr_type = GPIO_INTR_DISABLE;
@@ -31,7 +33,7 @@ uint8_t u8x8_esp_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, v
                         output.pull_up_en = GPIO_PULLUP_DISABLE;
                         gpio_config(&output);
                     } else {
-                        ESP_LOGD("u8x8_esp32", "Configure GPIO %d as input", pin);
+                        ESP_LOGD(TAG, "Configure GPIO %d as input", pin);
                         gpio_config_t input{};
                         input.mode = GPIO_MODE_INPUT;
                         input.intr_type = GPIO_INTR_DISABLE;
