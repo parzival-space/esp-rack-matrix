@@ -1,8 +1,11 @@
 #include <task/display_task.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
+#include <esp_log.h>
 
 #include <u8g2/u8x8_esp_compat.h>
+
+static auto TAG = "display_task";
 
 void display_task(void *arguments) {
     // init display
@@ -10,6 +13,8 @@ void display_task(void *arguments) {
         15,19, 18,
         U8X8_ESP_PIN_NONE
     );
+
+    ESP_LOGI(TAG, "display initialized");
     u8x8.begin();
     u8x8.setFont(u8x8_font_amstrad_cpc_extended_f);
     u8x8.setContrast(40);

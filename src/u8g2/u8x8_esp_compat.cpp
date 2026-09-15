@@ -2,7 +2,7 @@
 
 #include <U8x8lib.h>
 
-static const char* TAG = "u8x8_esp";
+static auto TAG = "u8x8_esp";
 
 extern "C" {
     #include <freertos/FreeRTOS.h>
