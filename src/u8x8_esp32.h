@@ -9,17 +9,15 @@
 #define U8X8_ESP32_PIN_CNT (U8X8_PIN_OUTPUT_CNT + U8X8_PIN_INPUT_CNT)
 
 /**
+ * Callback function for handling GPIO and delay operations required by the U8x8 library on the ESP32 platform.
  *
- * @param u8x8
- * @param msg
- * @param arg_int
- * @param arg_ptr
- * @return
+ * https://github.com/olikraus/u8g2/wiki/Porting-to-new-MCU-platform#the-uc-specific-gpio-and-delay-callback
  */
 uint8_t u8x8_esp32_gpio_and_delay_cb(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr) ;
 
 /**
- *
+ * Class for interfacing the MAX7219 8x8 LED matrix display using ESP32
+ * with 4-wire software SPI.
  */
 class U8X8_ESP32_MAX7219_8X8_4W_SW_SPI : public U8X8 {
     public: uint8_t pins[U8X8_ESP32_PIN_CNT]{};
@@ -28,8 +26,8 @@ class U8X8_ESP32_MAX7219_8X8_4W_SW_SPI : public U8X8 {
         u8x8_t *u8x8 = getU8x8();
 
         // set pin roles
-        for (uint8_t i = 0; i < U8X8_ESP32_PIN_CNT; i++) {
-            pins[i] = U8X8_ESP32_PIN_NONE;
+        for (unsigned char & pin : pins) {
+            pin = U8X8_ESP32_PIN_NONE;
         }
         pins[U8X8_PIN_SPI_CLOCK] = clock;
         pins[U8X8_PIN_SPI_DATA] = data;
