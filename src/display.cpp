@@ -14,19 +14,19 @@ void display_task(void *arguments) {
     u8x8.setFont(u8x8_font_amstrad_cpc_extended_f);
     u8x8.setContrast(40);
 
-    uint8_t tile[8] {
-        0b11111111,
-        0b11000001,
-        0b10100010,
-        0b10010100,
-        0b10001000,
-        0b10010100,
-        0b10100010,
-        0b11000001,
-    };
-
     while (true) {
-        u8x8.drawTile(0, 0, 1, tile);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        // create a point and move it from left to right, top to bottom
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                uint8_t tile[8]{};
+
+                // set the j bit to high
+                tile[i] = 1 << j;
+
+                u8x8.drawTile(0, 0, 1, tile);
+                vTaskDelay(50 / portTICK_PERIOD_MS);
+            }
+        }
+
     }
 }
