@@ -2,7 +2,7 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
-#include <u8x8_esp32.h>
+#include <u8g2/u8x8_esp_compat.h>
 
 void display_task(void *arguments) {
     // init display

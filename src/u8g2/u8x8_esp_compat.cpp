@@ -1,4 +1,4 @@
-#include <u8x8_esp32.h>
+#include <u8g2/u8x8_esp_compat.h>
 
 #include <U8x8lib.h>
 
