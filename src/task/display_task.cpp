@@ -6,9 +6,9 @@
 
 void display_task(void *arguments) {
     // init display
-    U8X8_ESP32_MAX7219_8X8_4W_SW_SPI u8x8(
+    U8X8_ESP_MAX7219_8X8_4W_SW_SPI u8x8(
         15,19, 18,
-        U8X8_ESP32_PIN_NONE
+        U8X8_ESP_PIN_NONE
     );
     u8x8.begin();
     u8x8.setFont(u8x8_font_amstrad_cpc_extended_f);
